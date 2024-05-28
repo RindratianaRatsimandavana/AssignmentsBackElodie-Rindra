@@ -2,6 +2,12 @@ const express = require('express');
 const app = express();
 const connectToDatabase = require('./config/db');
 const bodyParser = require('body-parser');
+const AssignmentController = require('./routes/AssignmentController');
+const ContenuController = require('./routes/ContenuController');
+const ClasseController = require('./routes/ClasseController');
+const PromotionController = require('./routes/promotionController');
+const MatiereController = require('./routes/MatiereController');
+
 connectToDatabase();
 
 app.use(bodyParser.json()); 
@@ -19,7 +25,64 @@ app.get('/', (req, res) => {
   res.send('Ca marche!! Yess!!!');
 });
 
+/**
+ * ================================================================
+ */
 
+const assignmentController = new AssignmentController();
+app.get('/assignments', assignmentController.getAssignments);
+app.get('/assignment/:id_matiere', assignmentController.getAssignmentByMatiere);
+app.get('/assignment/:id_promotion', assignmentController.getAssignmentByPromotion);
+
+app.put('/assignment/:id', assignmentController.updateAssignment);
+
+app.post('/assignment',assignmentController.createAssignment);
+
+/**
+ * ================================================================
+ */
+const contenuController = new ContenuController();
+app.get('/contenus',contenuController.getContenus);
+app.get('/contenu/eleve/:id_eleve/assignment/:id_assignment' , contenuController.getContenuByEleveByAssignment);
+app.get('/contenu/:id' , contenuController.getContenuById);
+app.get('/contenu/assignment/:id_assignment' , contenuController.getContenuByAssignment);
+
+app.put('/contenu/:id', contenuController.updateContenu);
+
+app.patch('/contenu/:id',contenuController.updateContenuNote);
+
+app.post('/contenu',contenuController.createContenu);
+
+/**
+ * ================================================================
+ */
+
+const classeController = new ClasseController();
+app.get('/classes' , classeController.getClasses);
+
+app.post('/classe',classeController.createClasses)
+
+/**
+ * ================================================================
+ */
+
+const promotionController = new PromotionController();
+app.get('/promotions' , promotionController.getPromotions);
+
+app.post('/promotion' , promotionController.createPromotion);
+
+/**
+ * ================================================================
+ */
+
+const matiereController = new MatiereController();
+app.get('/matieres' , matiereController.getMatieres);
+
+app.post('/matiere' , matiereController.createMatiere)
+
+/**
+ * ================================================================
+ */
 
 const port = process.env.PORT || 3000 ;
 app.set('port', port);
