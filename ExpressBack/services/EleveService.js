@@ -28,6 +28,18 @@ class EleveService {
             const eleve = await Eleve.find({ _id: id });
             console.log("Eleve by ID: ");
             console.log(eleve);
+            return eleve[0];
+        } catch (err) {
+            console.log(err)
+            throw err;
+        }
+    }
+
+    async getEleveByMail(email) {
+        try {
+            const eleve = await Eleve.findOne({ mail: email });
+            console.log("Eleve by mail: ");
+            console.log(eleve);
             return eleve;
         } catch (err) {
             console.log(err)

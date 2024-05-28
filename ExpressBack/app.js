@@ -89,8 +89,11 @@ app.post('/matiere' , matiereController.createMatiere)
 const eleveController = new EleveController();
 app.get('/eleves' , eleveController.getEleves);
 app.get('/eleve/:id' , eleveController.getEleveById)
+app.get('/eleveOnline' , eleveController.getEleveOnLine);
 
 app.post('/eleve', eleveController.createEleve);
+app.post('/loginEleve', eleveController.loginEleve);
+
 
 /**
  * ================================================================
