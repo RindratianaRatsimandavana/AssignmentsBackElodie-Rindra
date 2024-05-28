@@ -5,7 +5,7 @@ class ProfController {
         this.ProfService = new ProfService();
     }
 
-    getEleves = async (req, res) => {
+    getProfs = async (req, res) => {
         try {
             const profs = await this.ProfService.getProfs();
             res.send(profs);
@@ -17,7 +17,7 @@ class ProfController {
 
     
 
-    createEleve = async (req, res) => {
+    createProf = async (req, res) => {
         try {
             const newProf = await this.ProfService.createProf(req.body);
             res.status(201).send(newProf); 

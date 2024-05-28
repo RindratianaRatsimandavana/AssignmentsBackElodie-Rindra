@@ -7,6 +7,8 @@ const ContenuController = require('./routes/ContenuController');
 const ClasseController = require('./routes/ClasseController');
 const PromotionController = require('./routes/promotionController');
 const MatiereController = require('./routes/MatiereController');
+const EleveController = require('./routes/EleveController');
+const ProfController = require('./routes/ProfController');
 
 connectToDatabase();
 
@@ -83,6 +85,22 @@ app.post('/matiere' , matiereController.createMatiere)
 /**
  * ================================================================
  */
+
+const eleveController = new EleveController();
+app.get('/eleves' , eleveController.getEleves);
+app.get('/eleve/:id' , eleveController.getEleveById)
+
+app.post('/eleve', eleveController.createEleve);
+
+/**
+ * ================================================================
+ */
+
+const profController = new ProfController();
+app.get('/profs',profController.getProfs);
+
+app.post('/prof',profController.createProf);
+
 
 const port = process.env.PORT || 3000 ;
 app.set('port', port);

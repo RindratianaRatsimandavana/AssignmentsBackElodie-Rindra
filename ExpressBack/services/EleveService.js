@@ -37,10 +37,10 @@ class EleveService {
 
     async createEleve(data) {
         try {
-            const Eleve = new Eleve(data);
-            await Eleve.save();
+            const eleve = new Eleve(data);
+            await eleve.save();
             console.log("save Eleve service")
-            return Eleve;
+            return eleve;
         } catch (err) {
             throw err;
         }

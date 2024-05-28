@@ -13,10 +13,10 @@ class ProfService {
 
     async createProf(data) {
         try {
-            const Prof = new Prof(data);
-            await Prof.save();
+            const prof = new Prof(data);
+            await prof.save();
             console.log("save Prof service")
-            return Prof;
+            return prof;
         } catch (err) {
             throw err;
         }
