@@ -23,6 +23,22 @@ class EleveService {
         }
     }
 
+    async getEmailEleveByPromotion(idPromotion) {
+        try {
+            const eleves = await Eleve.find({ id_promotion: idPromotion });
+            console.log("Eleve by PROMOTION: ", eleves);
+
+            const emails = eleves.map(eleve => eleve.mail);
+            console.log("Emails: ", emails);
+    
+            return emails;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    }
+    
+
     async getEleveById(id) {
         try {
             const eleve = await Eleve.find({ _id: id });

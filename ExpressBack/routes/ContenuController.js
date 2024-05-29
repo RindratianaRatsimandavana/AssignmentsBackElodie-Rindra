@@ -1,5 +1,5 @@
 const ContenuService = require('../services/ContenuService');
-
+const upload = require('../utile/multer');
 class ContenuController {
     constructor() {
         this.ContenuService = new ContenuService();
@@ -83,6 +83,7 @@ class ContenuController {
                 req.body.note = 0;
                 if (req.file) {
                     req.body.reponse = req.file.path; // Ajouter le chemin du fichier téléchargé aux données du contenu
+                    console.log("path dans controller "+req.file.path)
                 }
 
                 const newContenu = await this.ContenuService.createContenu(req.body);

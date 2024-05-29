@@ -57,6 +57,8 @@ app.put('/contenu/:id', VerifyToken, contenuController.updateContenu);
 app.patch('/contenu/:id', VerifyTokenProf, contenuController.updateContenuNote);
 
 app.post('/contenu', VerifyToken, contenuController.createContenu);
+// app.post('/contenu',  contenuController.createContenu);
+
 
 /**
  * ================================================================
