@@ -75,12 +75,21 @@ class ContenuController {
 
     createContenu = async (req, res) => {
         try {
-            // console.log("Titre " + req.body.titre);
-            req.body.note = 0;
-            const newConetnu = await this.ContenuService.createContenu(req.body);
-            res.status(201).send(newConetnu);
+            upload.single('file')(req, res, async (err) => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+
+                req.body.note = 0;
+                if (req.file) {
+                    req.body.reponse = req.file.path; // Ajouter le chemin du fichier téléchargé aux données du contenu
+                }
+
+                const newContenu = await this.ContenuService.createContenu(req.body);
+                res.status(201).send(newContenu);
+            });
         } catch (err) {
-            console.log(err)
+            console.log(err);
             res.status(500).send(err);
         }
     };

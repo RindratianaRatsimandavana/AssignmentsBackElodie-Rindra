@@ -11,6 +11,30 @@ class ProfService {
         }
     }
 
+    async getProfById(id) {
+        try {
+            const prof = await Prof.findOne({ _id: id });
+            console.log("prof by ID: ");
+            console.log(prof);
+            return prof;
+        } catch (err) {
+            console.log(err)
+            throw err;
+        }
+    }
+
+    async getProfByMail(email) {
+        try {
+            const prof = await Prof.findOne({ mail: email });
+            console.log("prof by mail: ");
+            console.log(prof);
+            return prof;
+        } catch (err) {
+            console.log(err)
+            throw err;
+        }
+    }
+
     async createProf(data) {
         try {
             const prof = new Prof(data);

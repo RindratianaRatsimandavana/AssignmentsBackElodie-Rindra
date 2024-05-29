@@ -54,7 +54,7 @@ class EleveController {
                 try {
                     const eleve = await this.EleveService.getEleveById(decoded.id);
                     if (!eleve) return res.status(404).send("No user found.");
-                    eleve.mdp = 0
+                    eleve.mdp = 0;
 
                     res.status(200).send(eleve);
                 } catch (error) {
@@ -88,8 +88,6 @@ class EleveController {
     logOutEleve = async (req, res) => {
         res.status(200).send({ auth: false, token: null });
     };
-
-
 }
 
 module.exports = EleveController;
