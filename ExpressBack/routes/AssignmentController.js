@@ -4,6 +4,8 @@ const ContenuService = require('../services/ContenuService');
 const { getProfOnLine } = require('../utile/getProfOnline');
 const { sendMail } = require('../utile/sendMail');
 const { getEleveOnLine } = require('../utile/getEleveOnLine');
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 
 
@@ -123,8 +125,13 @@ class AssignmentController {
                 // Obtenir l'adresse e-mail du professeur en ligne
                 await sendMail(profMail, mail, req.body.id_matiere);
             }
-            
-            // req.body.id = profMail.id_matiere;
+
+            if(req.body._id==null){
+                req.body._id = new ObjectId();
+            }
+            req.body.id = profMail.id_matiere;
+            const dataa = req.body;
+            console.log('data namboarina b ',dataa)
             const newAssignment = await this.AssignmentService.createAssignment(req.body);
 
             res.status(201).send(newAssignment); // Répondre avec la nouvelle assignment créée
