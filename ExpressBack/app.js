@@ -43,6 +43,10 @@ app.put('/assignment/:id', VerifyTokenProf, assignmentController.updateAssignmen
 
 app.post('/assignment', VerifyTokenProf, assignmentController.createAssignment);
 
+app.delete('/assignment/:id'  , assignmentController.deleteAssignment);
+// app.delete('/assignment/:id' , VerifyTokenProf , assignmentController.deleteAssignment);
+
+
 /**
  * ================================================================
  */
@@ -56,8 +60,14 @@ app.put('/contenu/:id', VerifyToken, contenuController.updateContenu);
 
 app.patch('/contenu/:id', VerifyTokenProf, contenuController.updateContenuNote);
 
-app.post('/contenu', VerifyToken, contenuController.createContenu);
-// app.post('/contenu',  contenuController.createContenu);
+// app.post('/contenu', VerifyToken, contenuController.createContenu);
+app.post('/contenu',  contenuController.createContenu);
+
+// app.delete('/contenu/:id' , VerifyToken, contenuController.deleteContenu);
+app.delete('/contenu/:id' , contenuController.deleteContenu);
+app.delete('/contenu/assignment/:id' , contenuController.deleteContenuByAssignment);
+
+
 
 
 /**

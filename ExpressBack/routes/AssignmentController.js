@@ -1,5 +1,6 @@
 const AssignmentService = require('../services/AssignmentService');
 const EleveService = require('../services/EleveService');
+const ContenuService = require('../services/ContenuService');
 const { getProfOnLine } = require('../utile/getProfOnline');
 const { sendMail } = require('../utile/sendMail')
 
@@ -8,6 +9,7 @@ class AssignmentController {
     constructor() {
         this.AssignmentService = new AssignmentService();
         this.EleveService = new EleveService();
+        this.ContenuService = new ContenuService();
         this.createAssignment = this.createAssignment.bind(this);
     }
 
@@ -45,6 +47,17 @@ class AssignmentController {
             const updateData = req.body;
             const updatedAssignment = await this.AssignmentService.updateAssignment(id, updateData);
             res.send(updatedAssignment);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    };
+
+    deleteAssignment = async (req, res) => {
+        try {
+            const { id } = req.params;
+            const deletetedAssignment = await this.AssignmentService.deleteAssignmentById(id);
+            await this.ContenuService.deleteContenuByIdAssignment(id);
+            res.send(deletetedAssignment);
         } catch (error) {
             res.status(500).send(error);
         }

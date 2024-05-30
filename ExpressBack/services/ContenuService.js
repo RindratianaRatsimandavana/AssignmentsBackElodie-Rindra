@@ -74,7 +74,7 @@ class ContenuService {
         try {
             const result = await Contenu.updateOne(
                 { _id: id },
-                { $set: { note: newNote , siNote : true} }
+                { $set: { note: newNote, siNote: true } }
             );
             if (result.nModified === 0) {
                 throw new Error('No documents were updated');
@@ -97,6 +97,35 @@ class ContenuService {
             throw err;
         }
     }
+
+    async deleteContenuById(id) {
+        try {
+            const contenu = await Contenu.findByIdAndDelete(id);
+            if (contenu) {
+                console.log("Deleted contenu id: ", id);
+            } else {
+                console.log("contenu not found with id: ", id);
+            }
+        } catch (err) {
+            console.error("Error deleting contenu: ", err);
+            throw err;
+        }
+    }
+
+    async deleteContenuByIdAssignment(id) {
+        try {
+            const contenu = await Contenu.deleteMany({ id_assignment: id });
+            if (contenu) {
+                console.log("Deleted contenu id_assignment:", id);
+            } else {
+                console.log("Contenu not found with id_assignment:", id);
+            }
+        } catch (err) {
+            console.error("Error deleting contenu:", err);
+            throw err;
+        }
+    }
+
 }
 
 module.exports = ContenuService;

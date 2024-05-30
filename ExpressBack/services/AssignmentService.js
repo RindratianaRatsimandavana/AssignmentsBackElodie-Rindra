@@ -22,6 +22,20 @@ class AssignmentService {
     }
   }
 
+  async deleteAssignmentById(id) {
+    try {
+      const assignment = await Assignment.findByIdAndDelete(id);
+      if (assignment) {
+        console.log("Deleted Assignment id: ", id);
+      } else {
+        console.log("Assignment not found with id: ", id);
+      }
+    } catch (err) {
+      console.error("Error deleting assignment: ", err);
+      throw err;
+    }
+  }
+
   async getAssignmentByPromotion(id) {
     try {
       const assignments = await Assignment.find({ id_promotion: id });
@@ -38,11 +52,11 @@ class AssignmentService {
       if (!id) {
         throw new Error('Missing id for update');
       }
-      
+
       const updatedAssignment = await Assignment.findByIdAndUpdate(
         id,
         updateData,
-        { new: true, runValidators: true } 
+        { new: true, runValidators: true }
       );
 
       if (!updatedAssignment) {

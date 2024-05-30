@@ -73,13 +73,33 @@ class ContenuController {
         }
     };
 
+    deleteContenu = async (req, res) => {
+        try {
+            const { id } = req.params;
+            const deletetedContenu = await this.ContenuService.deleteContenuById(id);
+            res.send(deletetedContenu);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    };
+
+    deleteContenuByAssignment = async (req, res) => {
+        try {
+            const { id } = req.params;
+            const deletetedContenu = await this.ContenuService.deleteContenuByIdAssignment(id);
+            res.send(deletetedContenu);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    };
+
     createContenu = async (req, res) => {
         try {
             upload.single('file')(req, res, async (err) => {
                 if (err) {
                     return res.status(500).send(err);
                 }
-                console.log("ANAO UPLOAD ZAYYYYY ")
+                console.log("ANAO UPLOAD ZAYYYYY "+req.body.id_assignment)
 
                 req.body.note = 0;
                 req.body.siNote = false;
