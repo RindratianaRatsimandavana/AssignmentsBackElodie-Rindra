@@ -1,13 +1,14 @@
 const AssignmentService = require('../services/AssignmentService');
 const EleveService = require('../services/EleveService');
-const {getProf} = require('../utile/profOnline');
-const {sendMail} = require('../utile/sendMail')
+const { getProfOnLine } = require('../utile/getProfOnline');
+const { sendMail } = require('../utile/sendMail')
 
 
 class AssignmentController {
     constructor() {
         this.AssignmentService = new AssignmentService();
         this.EleveService = new EleveService();
+        this.createAssignment = this.createAssignment.bind(this);
     }
 
     getAssignments = async (req, res) => {
@@ -52,18 +53,20 @@ class AssignmentController {
     createAssignment = async (req, res) => {
         try {
             console.log("Titre " + req.body.titre);
-            
-            // Obtenir les adresses e-mail des élèves par promotion
-            const mail = await this.EleveService.getEmailEleveByPromotion(req.body.id_promotion);
-            
-            // Obtenir l'adresse e-mail du professeur en ligne
-            const profMail = await getProf();
-            
+
             // Créer la nouvelle assignment
-            const newAssignment = await this.AssignmentService.createAssignment(req.body);
-            
             // Envoyer un e-mail au professeur avec les détails de l'assignment
-            await sendMail(profMail, mail);
+            if (req.body.email_reminder) {
+                // Obtenir les adresses e-mail des élèves par promotion
+                const mail = await this.EleveService.getEmailEleveByPromotion(req.body.id_promotion);
+
+                // Obtenir l'adresse e-mail du professeur en ligne
+                const profMail = await getProfOnLine(req);
+
+
+                await sendMail(profMail, mail);
+            }
+            const newAssignment = await this.AssignmentService.createAssignment(req.body);
 
             res.status(201).send(newAssignment); // Répondre avec la nouvelle assignment créée
         } catch (err) {

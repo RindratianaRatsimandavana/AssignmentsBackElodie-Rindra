@@ -8,7 +8,8 @@ let ContenuSchema = Schema({
     commentaire: String,
     note: Number,
     reponse : String,
-    dateRendu : Date
+    dateRendu : Date,
+    siNote : Boolean
 });
 
 module.exports = mongoose.model('Contenus', ContenuSchema);

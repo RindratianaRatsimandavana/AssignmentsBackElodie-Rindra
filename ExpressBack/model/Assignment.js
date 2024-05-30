@@ -9,7 +9,8 @@ let AssignmentSchema = Schema({
     Description: String,
     upload_fichier: String,
     id_type_a_rendre : String,
-    dateRendu : Date
+    dateRendu : Date,
+    email_reminder : Boolean
 });
 
 module.exports = mongoose.model('Assignments', AssignmentSchema);

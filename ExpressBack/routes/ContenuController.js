@@ -81,6 +81,7 @@ class ContenuController {
                 }
 
                 req.body.note = 0;
+                req.body.siNote = false;
                 if (req.file) {
                     req.body.reponse = req.file.path; // Ajouter le chemin du fichier téléchargé aux données du contenu
                     console.log("path dans controller "+req.file.path)

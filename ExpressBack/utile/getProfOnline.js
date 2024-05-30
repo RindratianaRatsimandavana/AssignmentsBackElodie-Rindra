@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config');
+const ProfService = require('../services/ProfService');
 
-async function getProfOnLine() {
+async function getProfOnLine(req) {
     try {
         const token = req.headers['x-access-token'];
 
@@ -10,7 +11,9 @@ async function getProfOnLine() {
         }
 
         const decoded = jwt.verify(token, config.secret);
-        const prof = await this.ProfService.getProfById(decoded.id);
+        const profService = new ProfService();
+        const prof = await profService.getProfById(decoded.id);
+        console.log('getProfOnLine called with name:', prof.nom);
 
         if (!prof) {
             throw new Error('No user found.');

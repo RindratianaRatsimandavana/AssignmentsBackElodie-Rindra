@@ -74,7 +74,7 @@ class ContenuService {
         try {
             const result = await Contenu.updateOne(
                 { _id: id },
-                { $set: { note: newNote } }
+                { $set: { note: newNote , siNote : true} }
             );
             if (result.nModified === 0) {
                 throw new Error('No documents were updated');
