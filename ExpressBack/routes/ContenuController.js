@@ -79,12 +79,15 @@ class ContenuController {
                 if (err) {
                     return res.status(500).send(err);
                 }
+                console.log("ANAO UPLOAD ZAYYYYY ")
 
                 req.body.note = 0;
                 req.body.siNote = false;
                 if (req.file) {
                     req.body.reponse = req.file.path; // Ajouter le chemin du fichier téléchargé aux données du contenu
                     console.log("path dans controller "+req.file.path)
+                }else{
+                    console.log('tsisy file')
                 }
 
                 const newContenu = await this.ContenuService.createContenu(req.body);

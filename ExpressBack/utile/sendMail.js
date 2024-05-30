@@ -13,14 +13,14 @@ async function sendMail(mailSender, listmail) {
     });
     // send mail with defined transport object
     const msg = {
-        from: mailSender, // Adresse de l'expéditeur
+        from: mailSender.prenom + " "+ mailSender.nom, // Adresse de l'expéditeur
         to: listmail.join(','), // Liste des destinataires
         subject: "Nouvelle assignment disponible sur la plateforme étudiante", // Ligne d'objet
         html: `
             <p>Bonjour à tous,</p>
             <p>Je vous informe qu'une nouvelle assignment a été mise en ligne sur la plateforme étudiante/prof. Merci de bien vouloir vérifier la plateforme dès que possible pour prendre connaissance des détails et des instructions.</p>
             <p>
-                <a href="https://example.com/assignment" style="
+                <a href="http://localhost:4200" style="
                     display: inline-block;
                     padding: 10px 20px;
                     font-size: 16px;
