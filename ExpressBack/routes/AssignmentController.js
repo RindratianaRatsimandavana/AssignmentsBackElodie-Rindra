@@ -25,7 +25,31 @@ class AssignmentController {
 
     getAssignmentByMatiere = async (req, res) => {
         try {
+            console.log('controller ass by matiere')
             const assignments = await this.AssignmentService.getAssignmentByMatierer(req.params.id_matiere);
+            res.send(assignments);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    };
+
+    getAssignmentById = async (req, res) => {
+        try {
+            const assignments = await this.AssignmentService.getAssignmentById(req.params.id);
+            res.send(assignments);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    };
+
+    getAssignmentByMatiereToken = async (req, res) => {
+        console.log('MIDITRA CONTROLLER');
+        try {
+            console.log('MIDITRA CONTROLLER TRY');
+
+            const profMail = await getProfOnLine(req);
+            console.log("prof enligne : ", profMail)
+            const assignments = await this.AssignmentService.getAssignmentByMatierer(profMail.id_matiere);
             res.send(assignments);
         } catch (error) {
             res.status(500).send(error);
@@ -69,7 +93,8 @@ class AssignmentController {
 
             // Créer la nouvelle assignment
             // Envoyer un e-mail au professeur avec les détails de l'assignment
-            const profMail = await getProfOnLine(req);
+            // milA decommentene
+            // const profMail = await getProfOnLine(req);
 
             if (req.body.email_reminder) {
                 // Obtenir les adresses e-mail des élèves par promotion
@@ -78,8 +103,7 @@ class AssignmentController {
                 // Obtenir l'adresse e-mail du professeur en ligne
                 await sendMail(profMail, mail);
             }
-            req.body.id = profMail.id_matiere;
-
+            // req.body.id = profMail.id_matiere;
             const newAssignment = await this.AssignmentService.createAssignment(req.body);
 
             res.status(201).send(newAssignment); // Répondre avec la nouvelle assignment créée

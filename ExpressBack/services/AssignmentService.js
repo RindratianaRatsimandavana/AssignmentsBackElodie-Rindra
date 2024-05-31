@@ -14,7 +14,18 @@ class AssignmentService {
   async getAssignmentByMatierer(id) {
     try {
       const assignments = await Assignment.find({ id_matiere: id });
-      console.log("assignment by matiere: ");
+      console.log("assignment by matiere service: ");
+      console.log(assignments);
+      return assignments;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getAssignmentById(id) {
+    try {
+      const assignments = await Assignment.findOne({ _id: id });
+      console.log("assignment by Id service: ");
       console.log(assignments);
       return assignments;
     } catch (err) {

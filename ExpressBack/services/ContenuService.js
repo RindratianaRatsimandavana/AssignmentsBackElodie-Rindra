@@ -70,11 +70,12 @@ class ContenuService {
         }
     }
 
-    async updateContenuNote(id, newNote) {
+    async updateContenuNote(id, newContenu) {
         try {
+            
             const result = await Contenu.updateOne(
                 { _id: id },
-                { $set: { note: newNote, siNote: true } }
+                { $set: { note: newContenu.note, commentaire : newContenu.commentaire, siNote: true } }
             );
             if (result.nModified === 0) {
                 throw new Error('No documents were updated');

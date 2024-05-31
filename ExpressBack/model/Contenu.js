@@ -4,7 +4,7 @@ let Schema = mongoose.Schema;
 let ContenuSchema = Schema({
     // _id: Number,
     id_assignment : String,
-    id_eleve : Number,
+    id_eleve : String,
     commentaire: String,
     note: Number,
     reponse : String,

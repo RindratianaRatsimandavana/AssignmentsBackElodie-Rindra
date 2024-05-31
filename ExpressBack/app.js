@@ -36,8 +36,12 @@ app.get('/', (req, res) => {
 
 const assignmentController = new AssignmentController();
 app.get('/assignments', assignmentController.getAssignments);
+app.get('/assignment/prof', assignmentController.getAssignmentByMatiereToken);
+app.get('/assignment/id/:id', assignmentController.getAssignmentById);
 app.get('/assignment/:id_matiere', assignmentController.getAssignmentByMatiere);
-app.get('/assignment/:id_promotion', assignmentController.getAssignmentByPromotion);
+
+// app.get('/assignment/:id_promotion', assignmentController.getAssignmentByPromotion);
+
 
 app.put('/assignment/:id', VerifyTokenProf, assignmentController.updateAssignment);
 
@@ -58,7 +62,8 @@ app.get('/contenu/assignment/:id_assignment', contenuController.getContenuByAssi
 
 app.put('/contenu/:id', VerifyToken, contenuController.updateContenu);
 
-app.patch('/contenu/:id', VerifyTokenProf, contenuController.updateContenuNote);
+// app.patch('/contenu/:id', VerifyTokenProf, contenuController.updateContenuNote);
+app.patch('/contenu/:id', contenuController.updateContenuNote);
 
 // app.post('/contenu', VerifyToken, contenuController.createContenu);
 app.post('/contenu',  contenuController.createContenu);
@@ -106,7 +111,6 @@ app.get('/eleves', eleveController.getEleves);
 app.get('/eleve/:id', eleveController.getEleveById)
 app.get('/eleveOnline', eleveController.getEleveOnLine);
 app.get('/logoutEleve', eleveController.logOutEleve)
-
 
 app.post('/eleve', eleveController.createEleve);
 app.post('/loginEleve', eleveController.loginEleve);

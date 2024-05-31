@@ -3,8 +3,7 @@ let Schema = mongoose.Schema;
 
 let PromotionSchema = Schema({
     // _id: Number,
-    intitule : String,
-    id_classe : Number
+    intitule : String
 });
 
 module.exports = mongoose.model('Promotions', PromotionSchema);

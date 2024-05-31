@@ -4,10 +4,9 @@ let Schema = mongoose.Schema;
 let AssignmentSchema = Schema({
     // _id: Number,
     titre: String,
-    id_matiere : Number,
-    id_promotion : Number,
+    id_matiere : String,
+    id_promotion : String,
     Description: String,
-    upload_fichier: String,
     id_type_a_rendre : String,
     dateRendu : Date,
     email_reminder : Boolean

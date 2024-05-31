@@ -7,7 +7,7 @@ let ProfSchema = Schema({
     prenom: String,
     mail: String,
     mdp: String,
-    id_matiere: Number,
+    id_matiere: String,
     photo: String
 });
 

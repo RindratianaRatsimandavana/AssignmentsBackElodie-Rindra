@@ -46,7 +46,6 @@ class ContenuController {
         }
     };
 
-
     updateContenu = async (req, res) => {
         try {
             const { id } = req.params;
@@ -63,15 +62,36 @@ class ContenuController {
     updateContenuNote = async (req, res) => {
         try {
             const id = req.params.id;
-            const updateData = req.body.note;
-            console.log(updateData)
+            let updateData = {};
+    
+            // Check and add 'note' if present in the request body
+            if (req.body.note !== undefined) {
+                const note = Number(req.body.note);
+                console.log('note ',note)
+                if (isNaN(note)) {
+                    throw new Error('La note doit être un nombre.');
+                }
+                updateData.note = note;
+            }
+    
+            // Check and add 'commentaire' if present in the request body
+            if (req.body.commentaire !== undefined) {
+
+                updateData.commentaire = req.body.commentaire;
+            }
+    
+            console.log(updateData);
+            
+            // Update the content in the database
             const updatedContenu = await this.ContenuService.updateContenuNote(id, updateData);
             res.send(updatedContenu);
         } catch (error) {
-            console.log(error)
-            res.status(500).send(error);
+            console.log(error);
+            res.status(500).send(error.message || error);
         }
     };
+    
+    
 
     deleteContenu = async (req, res) => {
         try {
@@ -93,26 +113,38 @@ class ContenuController {
         }
     };
 
+    // createContenu = async (req, res) => {
+    //     try {
+    //         upload.single('file')(req, res, async (err) => {
+    //             if (err) {
+    //                 return res.status(500).send(err);
+    //             }
+    //             console.log("ANAO UPLOAD ZAYYYYY "+req.body.id_assignment)
+
+    //             req.body.note = 0;
+    //             req.body.siNote = false;
+    //             if (req.file) {
+    //                 req.body.reponse = req.file.path; // Ajouter le chemin du fichier téléchargé aux données du contenu
+    //                 console.log("path dans controller "+req.file.path)
+    //             }else{
+    //                 console.log('tsisy file')
+    //             }
+
+    //             const newContenu = await this.ContenuService.createContenu(req.body);
+    //             res.status(201).send(newContenu);
+    //         });
+    //     } catch (err) {
+    //         console.log(err);
+    //         res.status(500).send(err);
+    //     }
+    // };
     createContenu = async (req, res) => {
         try {
-            upload.single('file')(req, res, async (err) => {
-                if (err) {
-                    return res.status(500).send(err);
-                }
-                console.log("ANAO UPLOAD ZAYYYYY "+req.body.id_assignment)
+            req.body.note = 0;
+            req.body.siNote = false;
+            const newContenu = await this.ContenuService.createContenu(req.body);
+            res.status(201).send(newContenu);
 
-                req.body.note = 0;
-                req.body.siNote = false;
-                if (req.file) {
-                    req.body.reponse = req.file.path; // Ajouter le chemin du fichier téléchargé aux données du contenu
-                    console.log("path dans controller "+req.file.path)
-                }else{
-                    console.log('tsisy file')
-                }
-
-                const newContenu = await this.ContenuService.createContenu(req.body);
-                res.status(201).send(newContenu);
-            });
         } catch (err) {
             console.log(err);
             res.status(500).send(err);
