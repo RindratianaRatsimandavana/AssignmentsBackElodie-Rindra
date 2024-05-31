@@ -5,7 +5,7 @@ N° 48 RATSIMANDAVANA Rindratiana Holiniaina
 
 # Introduction : 
 Ceci est une application, ou plutôt une plateforme, pour les professeurs et les étudiants.   
-Elle permet aux professeurs d'envoyer des devoirs et aux étudiants de répondre à ces devoirs qui leur sont destinés.  
+Elle permet aux professeurs de gérer les devoirs de leurs créations à l'attribution des notes.  
 
 # Quelles sont les étapes à suivre pour la faire fonctionner sur votre machine?  
 Cette partie est la partir BackEnd du projet .  
