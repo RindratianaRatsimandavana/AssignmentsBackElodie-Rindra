@@ -94,7 +94,7 @@ class AssignmentController {
             // Créer la nouvelle assignment
             // Envoyer un e-mail au professeur avec les détails de l'assignment
             // milA decommentene
-            // const profMail = await getProfOnLine(req);
+            const profMail = await getProfOnLine(req);
 
             if (req.body.email_reminder) {
                 // Obtenir les adresses e-mail des élèves par promotion

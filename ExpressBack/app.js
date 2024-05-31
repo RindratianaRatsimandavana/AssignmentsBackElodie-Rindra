@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const AssignmentController = require('./routes/AssignmentController');
 const ContenuController = require('./routes/ContenuController');
 const ClasseController = require('./routes/ClasseController');
-const PromotionController = require('./routes/promotionController');
+const PromotionController = require('./routes/PromotionController');
 const MatiereController = require('./routes/MatiereController');
 const EleveController = require('./routes/EleveController');
 const ProfController = require('./routes/ProfController');
@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept ,x-access-token");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS , PATCH");
   next();
 });
 
